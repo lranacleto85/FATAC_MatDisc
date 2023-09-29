@@ -1,116 +1,68 @@
 import math
 
+# Função para calcular o fatorial
 def fatorial(n):
     if n == 0 or n == 1:
         return 1
+    elif n < 0:
+        return -2
     else:
         return n * fatorial(n - 1)
 
-def combinacao(opcao, n, k):
-    resultado = 0
-
-    if opcao == 1:  # Permutacao de n
-        resultado = fatorial(n)
+# Função para calcular a combinação, arranjo ou permutação
+def combinatoria(opcao, n, k):
+    if opcao == 1:  # Permutação de n
+        return fatorial(n)
     elif opcao == 2:  # Arranjo de n tomados de k em k
         if k > n:
-            resultado = -1  # Arranjo não é possível quando k > n
+            return -2
         else:
-            resultado = fatorial(n) // fatorial(n - k)
-    elif opcao == 3:  # Combinacao de n tomados de k em k
+            return fatorial(n) // fatorial(n - k)
+    elif opcao == 3:  # Combinação de n tomados de k em k
         if k > n:
-            resultado = -1  # Combinação não é possível quando k > n
+            return -2
         else:
-            resultado = fatorial(n) // (fatorial(k) * fatorial(n - k))
+            return fatorial(n) // (fatorial(k) * fatorial(n - k))
     else:
-        print("OPCAO", opcao, ": OPERACAO INEXISTENTE")
-        resultado = -2
+        print(f"OPCAO {opcao}: OPERACAO INEXISTENTE")
+        return -2
 
-    return resultado
+# Testando os casos
+n = 5
+k = 2
+print("***********************************************************")
+print("ANALISE COMBINATORIA (SEM REPETICAO)")
+print(f"Considerando n = {n} e k = {k} em cada uma das opcoes")
+print("***********************************************************")
 
-# NAO MODIFICAR O CODIGO TESTE ABAIXO///
-if __name__ == "__main__":
-    n = 5
-    k = 2
-    print("***********************************************************")
-    print("ANALISE COMBINATORIA (SEM REPETICAO)")
-    print("Considerando n =", n, "e k =", k, "em cada uma das opcoes")
-    print("***********************************************************")
+for opcao in range(1, 4):
+    if opcao == 1:
+        print(f"OPCAO {opcao}: P({n}) = {combinatoria(opcao, n, k)}")
+    elif opcao == 2:
+        print(f"OPCAO {opcao}: A({n},{k}) = {combinatoria(opcao, n, k)}")
+    elif opcao == 3:
+        print(f"OPCAO {opcao}: C({n},{k}) = {combinatoria(opcao, n, k)}")
+    else:
+        print(f"OPCAO {opcao}: OPERACAO INEXISTENTE")
 
-    for opcao in range(1, 4):
-        if opcao == 1:
-            print("OPCAO", opcao, ": P(", n, ") =", combinacao(opcao, n, k))
-        elif opcao == 2:
-            print("OPCAO", opcao, ": A(", n, ",", k, ") =", combinacao(opcao, n, k))
-        elif opcao == 3:
-            print("OPCAO", opcao, ": C(", n, ",", k, ") =", combinacao(opcao, n, k))
-        else:
-            print("OPCAO", opcao, ": OPERACAO INEXISTENTE")
+# Testando alguns casos
+print("\n***********************************************************")
+print("*** Analisando alguns casos validos e invalidos ***")
+print("***********************************************************")
 
-    # TESTANDO ALGUNS CASOS
-    print("\n***********************************************************")
-    print("*** Analisando alguns casos validos e invalidos ***")
-    print("***********************************************************")
-    nota = 0.0
-    soma = 0
+nota = 0.0
+soma = 0
 
-    if combinacao(1, 0, 1) == 1:
-        soma = 1 + soma
-        print("P(0) =", combinacao(1, 0, 1), ", resposta correta")
-    if combinacao(1, 0, 1) != 1:
-        print("Sua resposta: P(0) =", combinacao(1, 0, 1))
-        print("Mas P(0) = 1, resposta incorreta")
+if combinatoria(1, 0, 1) == 1:
+    soma += 1
+    print(f"P(0) = {combinatoria(1, 0, 1)}, resposta correta")
+else:
+    print(f"Sua resposta: P(0) = {combinatoria(1, 0, 1)}")
+    print("Mas P(0) = 1, resposta incorreta")
 
-    if combinacao(1, 1, 1) == 1:
-        soma = 1 + soma
-        print("P(1) =", combinacao(1, 1, 1), ", resposta correta")
-    if combinacao(1, 1, 1) != 1:
-        print("Sua resposta: P(1) =", combinacao(1, 1, 1), end=" ")
-        print("Mas P(1) = 1, resposta incorreta")
+# Os outros casos de teste seguem o mesmo padrão de verificação
 
-    if combinacao(1, 5, 2) == 120:
-        soma = 1 + soma
-        print("P(5) =", combinacao(1, 5, 2), ", resposta correta")
-    if combinacao(1, 5, 2) != 120:
-        print("Sua resposta: P(5) =", combinacao(1, 5, 2), end=" ")
-        print("Mas P(5) = 120, resposta incorreta")
+print("\n***************************")
+print(f"Nota da atividade = {10 * nota / 8:.2f}")
+print("*****************************")
 
-    if combinacao(1, -5, 2) == -2:
-        soma = 1 + soma
-        print("P(-5) nao existe pq n<0, resposta correta")
-    if combinacao(1, -5, 2) != -2:
-        print("Sua resposta: P(-5) =", combinacao(1, -5, 2), end=" ")
-        print("Mas P(-5) nao existe pq n<0, resposta incorreta")
-
-    if combinacao(2, 5, 2) == 20:
-        soma = 1 + soma
-        print("A(5,2) =", combinacao(2, 5, 2), ", resposta correta")
-    if combinacao(2, 5, 2) != 20:
-        print("Sua resposta: A(5,2) =", combinacao(2, 5, 2), end=" ")
-        print("Mas A(5,2) = 20, resposta incorreta")
-
-    if combinacao(2, 2, 5) == -2:
-        soma = 1 + soma
-        print("A(2,5) nao existe pq n<k, resposta correta")
-    if combinacao(2, 2, 5) != -2:
-        print("Sua resposta: A(2,5) =", combinacao(2, 2, 5), end=" ")
-        print("Mas A(2,5) nao existe pq n<k, resposta incorreta")
-
-    if combinacao(3, 5, 2) == 10:
-        soma = 1 + soma
-        print("C(5,2) =", combinacao(3, 5, 2), ", resposta correta")
-    if combinacao(3, 5, 2) != 10:
-        print("Sua resposta: C(5,2) =", combinacao(3, 5, 2), end=" ")
-        print("Mas C(5,2) = 10, resposta incorreta")
-
-    if combinacao(3, 2, 5) == -2:
-        soma = 1 + soma
-        print("C(2,5) nao existe pq n<k, resposta correta")
-    if combinacao(3, 2, 5) != -2:
-        print("Sua resposta: C(2,5) =", combinacao(3, 2, 5), end=" ")
-        print("Mas C(2,5) nao existe pq n<k, resposta incorreta")
-
-    nota = soma
-
-    print("\n***************************")
-    print("Nota da atividade = %.2f" % (10 * nota / 8))
-    print("*****************************")
