@@ -16,8 +16,9 @@ int fatorial(int n)
 {
     
     if (n == 0 || n == 1)
-        return 1;
-    // else if (n menor que zero) → retorna -2. 
+        return -1;
+    else if (n<0) 
+        return -2. 
     else
         return n * fatorial(n - 1);
 }
@@ -34,7 +35,7 @@ int combinatoria(int opcao, int n, int k)
 
     case 2: // Arranjo de n tomados de k em k
         if (k > n) {
-            resultado = -1;  // Arranjo não é possível quando k > n //retornar -2 conforme código do professor, senão vai dar errado
+            resultado = -2;  // Arranjo não é possível quando k > n //retornar -2 conforme código do professor, senão vai dar errado
         } else {
             resultado = fatorial(n) / fatorial(n - k);
         }
@@ -42,7 +43,7 @@ int combinatoria(int opcao, int n, int k)
 
     case 3: // Combinacao de n tomados de k em k
         if (k > n) {
-            resultado = -1;  // Combinação não é possível quando k > n //retornar -2 conforme código do professor, senão vai dar errado
+            resultado = -2;  // Combinação não é possível quando k > n //retornar -2 conforme código do professor, senão vai dar errado
         } else {
             resultado = fatorial(n) / (fatorial(k) * fatorial(n - k));
         }
