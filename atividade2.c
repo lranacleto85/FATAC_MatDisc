@@ -21,7 +21,6 @@ int fatorial(int n)
     else
         return n * fatorial(n - 1);
 }
-}
 
 
 int combinatoria(int opcao, int n, int k)
